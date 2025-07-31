@@ -124,3 +124,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.page-header {
+  @apply text-2xl font-bold tracking-tight;
+}

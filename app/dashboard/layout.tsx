@@ -46,8 +46,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </Breadcrumb>
           </div>
         </header>
-
-        <main className="flex flex-1 flex-col gap-4 p-4 pt-0">{children}</main>
+        <main className="min-w-full">
+          <React.Suspense>
+            <div className="px-4">{children}</div>
+          </React.Suspense>
+        </main>
       </SidebarInset>
     </SidebarProvider>
   );

@@ -20,8 +20,13 @@ export function useLogin() {
 
   const onSubmit = async (loginData: LoginSchema) => {
     const { data } = await loginApi(loginData);
-    if (data) {
-      setToken(data.access_token);
+    if (data?.accessToken) {
+      setToken(data.accessToken);
+      const token = useAuthStore.getState().token;
+      if (token !== data.accessToken) {
+        console.warn('Access token mismatch!');
+      }
+
       redirect('/dashboard');
     }
   };

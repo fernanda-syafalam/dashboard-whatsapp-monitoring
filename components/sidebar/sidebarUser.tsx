@@ -12,17 +12,22 @@ import {
 } from '@/components/ui/dropdownMenu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
 import React from 'react';
+import api from '@/lib/http';
+import { useAuthStore } from '@/store/authStore';
 
 const NAV_USER_MENU = [
   { title: 'Upgrade to Pro', icon: Sparkles, url: '#', separator: true },
   { title: 'Billing', icon: CreditCard, url: '#' },
-  { title: 'Settings', icon: Settings, url: '#', separator: true },
-  { title: 'Logout', icon: LogOut, url: '#' }
+  { title: 'Settings', icon: Settings, url: '#', separator: true }
 ];
 
 export function NavUser({ user }: { user: { name: string; email: string; avatar: string } }) {
   const { isMobile } = useSidebar();
-
+  const { logout } = useAuthStore(state => state);
+  const handleLogout = async () => {
+    console.log('logout');
+    logout();
+  };
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -56,6 +61,10 @@ export function NavUser({ user }: { user: { name: string; email: string; avatar:
                 {item.separator && index !== NAV_USER_MENU.length - 1 && <DropdownMenuSeparator />}
               </React.Fragment>
             ))}
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleLogout}>
+              <LogOut /> Logout
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>

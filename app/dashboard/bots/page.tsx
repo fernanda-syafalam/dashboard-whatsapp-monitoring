@@ -1,10 +1,10 @@
-import TableBots from '@/modules/dashboard/bots/components/tableBots';
-import DashboardLayout from '../layouts';
+import TableBots from '@/modules/dashboard/bots/components/table-bot';
+import DashboardLayout from '../layout';
 
 export default function Page() {
   return (
-    <DashboardLayout>
+    <div className="">
       <TableBots />
-    </DashboardLayout>
+    </div>
   );
 }

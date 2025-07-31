@@ -1,4 +1,5 @@
 import api from '@/lib/http';
+import { ApiResponseDto } from '@/types/api-types';
 
 type LoginPayload = {
   email: string;
@@ -6,10 +7,12 @@ type LoginPayload = {
 };
 
 type LoginData = {
-  access_token: string;
+  accessToken: string;
 };
+
 export async function loginApi(body: LoginPayload) {
-  return await api.post<LoginData>('auth/login', body);
+  const { data } = await api.post<ApiResponseDto<LoginData>>('auth/login', body);
+  return data;
 }
 
 export async function getTest() {
