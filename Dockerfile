@@ -4,11 +4,11 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm ci
+RUN npm install -g pnpm && pnpm i
 
 COPY . .
 
-RUN npm run build
+RUN pnpm run build
 
 # Production Stage 
 
