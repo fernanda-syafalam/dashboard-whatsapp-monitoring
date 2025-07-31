@@ -11,8 +11,9 @@ COPY package.json pnpm-lock.yaml ./
 # Instal pnpm secara global di tahap 'deps'
 RUN npm install -g pnpm
 
-# Instal hanya dependensi produksi menggunakan pnpm
-RUN pnpm install --frozen-lockfile --prod
+# Instal SEMUA dependensi (termasuk devDependencies)
+# Ini penting agar alat build seperti PostCSS dan lainnya tersedia
+RUN pnpm install --frozen-lockfile
 
 # --- Tahap 2: Build Aplikasi Next.js ---
 FROM node:22-alpine AS builder
@@ -20,7 +21,7 @@ FROM node:22-alpine AS builder
 # Atur direktori kerja
 WORKDIR /app
 
-# Salin dependensi dari tahap 'deps'
+# Salin dependensi dari tahap 'deps' (ini akan menyalin semua node_modules, termasuk devDependencies)
 COPY --from=deps /app/node_modules ./node_modules
 
 # Salin sisa kode aplikasi
