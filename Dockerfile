@@ -53,7 +53,9 @@ RUN pnpm run build
 FROM node:22-alpine AS runner
 
 # Buat user non-root untuk keamanan
-RUN addgroup --system appgroup && adduser --system --ingroup appuser appuser
+# Memisahkan perintah addgroup dan adduser untuk memastikan grup dibuat sebelum user ditambahkan
+RUN addgroup --system appgroup
+RUN adduser --system --ingroup appgroup appuser
 USER appuser
 
 # Atur direktori kerja ke folder standalone yang dibuat oleh Next.js
