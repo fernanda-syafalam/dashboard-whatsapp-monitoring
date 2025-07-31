@@ -21,14 +21,26 @@ FROM node:22-alpine AS builder
 # Atur direktori kerja
 WORKDIR /app
 
-# Salin dependensi dari tahap 'deps' (ini akan menyalin semua node_modules, termasuk devDependencies)
-COPY --from=deps /app/node_modules ./node_modules
+# Salin package.json dan pnpm-lock.yaml lagi.
+# Ini penting untuk memastikan pnpm install di tahap builder menggunakan cache yang benar
+COPY package.json pnpm-lock.yaml ./
 
-# Salin sisa kode aplikasi
+# Instal pnpm secara global di tahap 'builder'
+RUN npm install -g pnpm
+
+# Instal kembali semua dependensi di tahap builder.
+# Ini adalah solusi umum untuk masalah resolusi modul pnpm/Docker selama build,
+# memastikan semua dependensi terhubung dengan benar dalam konteks build ini.
+RUN pnpm install --frozen-lockfile
+
+# Salin sisa kode aplikasi, termasuk postcss.config.js, tailwind.config.js, dan global CSS
 COPY . .
 
-# Instal pnpm secara global di tahap 'builder' juga, untuk memastikan `pnpm run build` berfungsi
-RUN npm install -g pnpm
+# --- DEBUG: Verifikasi keberadaan @tailwindcss/postcss ---
+# Baris ini akan menampilkan apakah modul tersebut ada di node_modules
+RUN echo "--- Verifying @tailwindcss/postcss in builder stage after re-install ---"
+RUN ls -l node_modules/@tailwindcss/postcss || echo "@tailwindcss/postcss not found!"
+RUN echo "----------------------------------------------------"
 
 # Pastikan output Next.js disetel ke 'standalone' di next.config.js
 # module.exports = {
@@ -41,7 +53,7 @@ RUN pnpm run build
 FROM node:22-alpine AS runner
 
 # Buat user non-root untuk keamanan
-RUN addgroup --system appgroup && adduser --system --ingroup appgroup appuser
+RUN addgroup --system appgroup && adduser --system --ingroup appuser appuser
 USER appuser
 
 # Atur direktori kerja ke folder standalone yang dibuat oleh Next.js
