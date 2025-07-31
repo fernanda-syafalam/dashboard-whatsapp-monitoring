@@ -8,7 +8,10 @@ WORKDIR /app
 # Salin package.json dan pnpm-lock.yaml
 COPY package.json pnpm-lock.yaml ./
 
-# Instal hanya dependensi produksi
+# Instal pnpm secara global di tahap 'deps'
+RUN npm install -g pnpm
+
+# Instal hanya dependensi produksi menggunakan pnpm
 RUN pnpm install --frozen-lockfile --prod
 
 # --- Tahap 2: Build Aplikasi Next.js ---
@@ -22,6 +25,9 @@ COPY --from=deps /app/node_modules ./node_modules
 
 # Salin sisa kode aplikasi
 COPY . .
+
+# Instal pnpm secara global di tahap 'builder' juga, untuk memastikan `pnpm run build` berfungsi
+RUN npm install -g pnpm
 
 # Pastikan output Next.js disetel ke 'standalone' di next.config.js
 # module.exports = {
@@ -55,4 +61,3 @@ EXPOSE 3000
 # Perintah untuk menjalankan aplikasi Next.js
 # Next.js akan secara otomatis menemukan file yang dibutuhkan di folder standalone
 CMD ["node", "server.js"]
-
