@@ -1,4 +1,3 @@
-import DashboardLayout from '../layout';
 import TableUsers from '@/modules/dashboard/users/components/table-user';
 
 export default function Page() {

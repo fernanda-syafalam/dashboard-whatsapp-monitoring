@@ -1,5 +1,5 @@
 import { useAuthStore } from '@/store/authStore';
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import 'dotenv/config';
 
 const api: AxiosInstance = axios.create({

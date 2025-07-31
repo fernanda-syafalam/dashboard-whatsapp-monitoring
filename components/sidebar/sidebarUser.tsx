@@ -12,7 +12,6 @@ import {
 } from '@/components/ui/dropdownMenu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
 import React from 'react';
-import api from '@/lib/http';
 import { useAuthStore } from '@/store/authStore';
 
 const NAV_USER_MENU = [

@@ -113,8 +113,8 @@ export function UsersAddDialog({ currentRow, open, onOpenChange, onSubmit }: Pro
                           placeholder="Select a role"
                           className="col-span-4 "
                           items={
-                            userRoles.data?.items && Array.isArray(userRoles.data.items)
-                              ? userRoles.data.items.map((item: UserRole) => ({
+                            userRoles.data?.data && Array.isArray(userRoles.data?.data)
+                              ? userRoles.data?.data.map((item: UserRole) => ({
                                   label: item.name.charAt(0).toUpperCase() + item.name.slice(1),
                                   value: item.id
                                 }))

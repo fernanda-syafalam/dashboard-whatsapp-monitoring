@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { AudioWaveform, Bot, Command, Frame, GalleryVerticalEnd, User, Users } from 'lucide-react';
+import { AudioWaveform, Bot, Command, Frame, GalleryVerticalEnd, Users } from 'lucide-react';
 
 import { NavMain } from '@/components/sidebar/sidebarMain';
 import { NavUser } from '@/components/sidebar/sidebarUser';
