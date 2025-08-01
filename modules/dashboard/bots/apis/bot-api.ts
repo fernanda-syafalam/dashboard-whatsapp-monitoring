@@ -1,5 +1,6 @@
 import api from '@/lib/http';
 import { Bots } from '../components/columns';
+import { ApiResponseDto } from '@/types/api-types';
 
 type GetAllRequest = {
   page: number;
@@ -23,11 +24,11 @@ type CreateBotRequestBody = {
 
 export const botService = {
   async getBots(params: GetAllRequest) {
-    const { data } = await api.get<GetAllResponse>('/bots', { params });
+    const { data } = await api.get<ApiResponseDto<GetAllResponse>>('/bots', { params });
     return data.data;
   },
   async getGeneratedBarcode(id: string) {
-    const { data } = await api.post<GenerateQrResponse>('/whatsapp/generate-qr', { deviceID: id });
+    const { data } = await api.post<ApiResponseDto<GenerateQrResponse>>('/whatsapp/generate-qr', { deviceID: id });
     return data;
   },
   async create(data: CreateBotRequestBody) {

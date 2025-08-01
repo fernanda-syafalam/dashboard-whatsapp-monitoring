@@ -28,11 +28,12 @@ const ModalBarcode = ({ open, onOpenChange, currentRow }: Props) => {
 
       setLoading(true);
       setError(null);
-      setBarcodeData(null); 
+      setBarcodeData(null);
 
       try {
-        const data = await botService.getGeneratedBarcode(currentRow.id);
-        setBarcodeData(data.qrCode);
+        const { data } = await botService.getGeneratedBarcode(currentRow.id);
+        console.log('Fetched barcode data:', data);
+        setBarcodeData(data?.qrCode || null);
       } catch (err) {
         console.error('Error fetching barcode:', err);
         setError('Gagal memuat QR Code. Pastikan ID bot benar.');
@@ -63,14 +64,15 @@ const ModalBarcode = ({ open, onOpenChange, currentRow }: Props) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-sm p-6 sm:max-w-md"> {/* Ukuran modal sedikit lebih compact */}
+      <DialogContent className="max-w-sm p-6 sm:max-w-md">
+        {' '}
+        {/* Ukuran modal sedikit lebih compact */}
         <DialogHeader className="text-center">
           <DialogTitle className="text-2xl font-semibold">{dialogTitle}</DialogTitle>
           <DialogDescription className="text-sm text-muted-foreground mt-1">
             Scan QR Code di bawah ini untuk memulai sesi bot.
           </DialogDescription>
         </DialogHeader>
-
         <div className="flex justify-center items-center my-6 h-[260px] w-full bg-gray-50 dark:bg-gray-800 rounded-lg border border-dashed border-gray-200 dark:border-gray-700 overflow-hidden">
           {loading ? (
             <div className="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400">
@@ -92,7 +94,7 @@ const ModalBarcode = ({ open, onOpenChange, currentRow }: Props) => {
               quality={100}
               priority
               unoptimized={barcodeData.startsWith('data:')}
-              className="rounded-lg object-contain" 
+              className="rounded-lg object-contain"
             />
           ) : (
             <div className="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 p-4">
@@ -101,10 +103,7 @@ const ModalBarcode = ({ open, onOpenChange, currentRow }: Props) => {
             </div>
           )}
         </div>
-        
-        <div className="text-center text-xs text-muted-foreground mt-4">
-          Pastikan perangkat Anda terhubung ke internet.
-        </div>
+        <div className="text-center text-xs text-muted-foreground mt-4">Pastikan perangkat Anda terhubung ke internet.</div>
       </DialogContent>
     </Dialog>
   );
