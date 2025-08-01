@@ -45,6 +45,12 @@ const data = {
       url: '/dashboard/users',
       icon: Users,
       isActive: false
+    },
+    {
+      title: 'Corporate',
+      url: '/dashboard/corporate',
+      icon: GalleryVerticalEnd,
+      isActive: false
     }
   ]
 };

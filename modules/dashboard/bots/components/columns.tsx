@@ -1,6 +1,5 @@
 'use client';
 
-import { DataTableColumnHeader } from '@/components/table/dataTableColumnHeader';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ColumnDef } from '@tanstack/react-table';
@@ -8,6 +7,7 @@ import { Check, CircleSlash, Trash2 } from 'lucide-react';
 import { BsQrCodeScan } from 'react-icons/bs';
 import { AiOutlineDisconnect } from 'react-icons/ai';
 import { DataTableRowAction } from '@/types/data-table';
+import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header';
 
 export type Bots = {
   id: string;

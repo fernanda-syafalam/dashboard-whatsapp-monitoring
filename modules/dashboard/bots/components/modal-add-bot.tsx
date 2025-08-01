@@ -90,7 +90,7 @@ const ModalAddBot = ({ open, onOpenChange, onSubmit, currentRow }: Props) => {
                           placeholder="Select Corporation"
                           className="col-span-4 "
                           items={
-                            corporates.data?.data?.items?.map(({ id, name }) => ({
+                            corporates.data?.data?.map(({ id, name }) => ({
                               label: name.charAt(0).toUpperCase() + name.slice(1),
                               value: id
                             })) ?? []
