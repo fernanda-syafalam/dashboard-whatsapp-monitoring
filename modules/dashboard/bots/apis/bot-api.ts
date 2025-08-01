@@ -1,16 +1,8 @@
 import api from '@/lib/http';
 import { Bots } from '../components/columns';
-import { ApiResponseDto } from '@/types/api-types';
+import { ApiResponseDto, TableParams } from '@/types/api-types';
 
-type GetAllRequest = {
-  page: number;
-  limit: number;
-  corporateID: string;
-};
-
-type GetAllResponse = {
-  data: Bots[];
-};
+interface GetAllRequest extends TableParams {}
 
 type GenerateQrResponse = {
   qrCode: string;
@@ -20,12 +12,12 @@ type CreateBotRequestBody = {
   name: string;
   description: string;
   corporateID: string;
-}
+};
 
 export const botService = {
   async getBots(params: GetAllRequest) {
-    const { data } = await api.get<ApiResponseDto<GetAllResponse>>('/bots', { params });
-    return data.data;
+    const { data } = await api.get<ApiResponseDto<Bots[]>>('/bots', { params });
+    return data;
   },
   async getGeneratedBarcode(id: string) {
     const { data } = await api.post<ApiResponseDto<GenerateQrResponse>>('/whatsapp/generate-qr', { deviceID: id });

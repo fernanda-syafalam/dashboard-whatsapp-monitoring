@@ -12,20 +12,19 @@ import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { useBots } from '../hooks/use-bot';
 import ModalAddBot from './modal-add-bot';
-import { botService } from '../apis/bot-api';
 import { useActionBot } from '../hooks/use-action-bot';
 import { ConfirmationDialog } from '@/components/confirmation-dialog';
 
 export default function TableBots() {
-  const { data } = useBots(1, 10, 'etst');
+  const { data } = useBots();
   const [rowAction, setRowAction] = React.useState<DataTableRowAction<Bots> | null>(null);
   const columns = getBotTableColumns({ setRowAction });
   const { dialog, isLoading, setDialog, handleSubmitCreate, handleSubmitDelete, handleDisconnect } = useActionBot();
 
   const { table } = useDataTable({
-    data: data ?? [],
+    data: data?.data ?? [],
     columns: columns,
-    pageCount: 0,
+    pageCount: data?.pagination?.totalPages || 0,
     initialState: {
       sorting: [{ id: 'createdAt', desc: false }],
       columnPinning: { right: ['actions'] }
