@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { useRouter } from 'next/navigation'; // Import useRouter
 
 type User = {
   id: string;
@@ -28,7 +29,6 @@ export const useAuthStore = create<AuthState>()(
         if (get().token) {
           set({ user: null, token: null });
         }
-        redirect('/login');
       }
     }),
     { name: 'auth-store' }

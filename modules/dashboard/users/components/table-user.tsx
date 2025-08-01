@@ -35,10 +35,6 @@ export default function TableUsers() {
     clearOnDefault: true
   });
 
-  useEffect(() => {
-    console.log('TableUsers data', data?.data);
-  }, [data]);
-
   return (
     <div className="w-full min-w-full container mx-auto mt-3">
       <div className="mb-5 flex flex-wrap items-center justify-between space-y-2">

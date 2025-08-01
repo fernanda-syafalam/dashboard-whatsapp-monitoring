@@ -14,7 +14,6 @@ interface FetchUsersParams extends TableParams {}
 export const usersService = {
   fetchUsers: async (params: FetchUsersParams) => {
     const { data } = await api.get<ApiResponseDto<Users[]>>(`/users`, { params });
-    console.log('fetchUsers', data);
     return data;
   },
   createUser: async (data: CreateUserBody) => {

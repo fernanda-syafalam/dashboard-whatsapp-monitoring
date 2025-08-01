@@ -32,10 +32,8 @@ const ModalBarcode = ({ open, onOpenChange, currentRow }: Props) => {
 
       try {
         const { data } = await botService.getGeneratedBarcode(currentRow.id);
-        console.log('Fetched barcode data:', data);
         setBarcodeData(data?.qrCode || null);
       } catch (err) {
-        console.error('Error fetching barcode:', err);
         setError('Gagal memuat QR Code. Pastikan ID bot benar.');
       } finally {
         setLoading(false);

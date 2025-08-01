@@ -13,6 +13,7 @@ import {
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
 import React from 'react';
 import { useAuthStore } from '@/store/authStore';
+import { useRouter } from 'next/navigation';
 
 const NAV_USER_MENU = [
   { title: 'Upgrade to Pro', icon: Sparkles, url: '#', separator: true },
@@ -23,9 +24,11 @@ const NAV_USER_MENU = [
 export function NavUser({ user }: { user: { name: string; email: string; avatar: string } }) {
   const { isMobile } = useSidebar();
   const { logout } = useAuthStore(state => state);
+  const router = useRouter();
   const handleLogout = async () => {
-    console.log('logout');
     logout();
+
+    router.push('/login');
   };
   return (
     <SidebarMenu>
