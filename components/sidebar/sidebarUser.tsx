@@ -15,11 +15,11 @@ import React from 'react';
 import { useAuthStore } from '@/store/authStore';
 import { useRouter } from 'next/navigation';
 
-const NAV_USER_MENU = [
-  { title: 'Upgrade to Pro', icon: Sparkles, url: '#', separator: true },
-  { title: 'Billing', icon: CreditCard, url: '#' },
-  { title: 'Settings', icon: Settings, url: '#', separator: true }
-];
+// const NAV_USER_MENU = [
+//   { title: 'Upgrade to Pro', icon: Sparkles, url: '#', separator: true },
+//   { title: 'Billing', icon: CreditCard, url: '#' },
+//   { title: 'Settings', icon: Settings, url: '#', separator: true }
+// ];
 
 export function NavUser({ user }: { user: { name: string; email: string; avatar: string } }) {
   const { isMobile } = useSidebar();
@@ -53,7 +53,7 @@ export function NavUser({ user }: { user: { name: string; email: string; avatar:
                 {renderUserInfo(user)}
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
+            {/* <DropdownMenuSeparator />
             {NAV_USER_MENU.map((item, index) => (
               <React.Fragment key={item.title}>
                 <DropdownMenuItem>
@@ -62,7 +62,7 @@ export function NavUser({ user }: { user: { name: string; email: string; avatar:
                 </DropdownMenuItem>
                 {item.separator && index !== NAV_USER_MENU.length - 1 && <DropdownMenuSeparator />}
               </React.Fragment>
-            ))}
+            ))} */}
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout}>
               <LogOut /> Logout
