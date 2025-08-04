@@ -20,7 +20,7 @@ export const botService = {
     return data;
   },
   async getGeneratedBarcode(id: string) {
-    const { data } = await api.post<ApiResponseDto<GenerateQrResponse>>('/whatsapp/generate-qr', { deviceID: id });
+    const { data } = await api.post<ApiResponseDto<GenerateQrResponse>>('/whatsapp/generate-qr/' + id);
     return data;
   },
   async create(data: CreateBotRequestBody) {
