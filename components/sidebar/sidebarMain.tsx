@@ -1,6 +1,6 @@
 'use client';
 
-import { type LucideIcon } from 'lucide-react';
+import { Dock, type LucideIcon } from 'lucide-react';
 
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import Link from 'next/link';
@@ -36,6 +36,16 @@ export function NavMain({
             </Link>
           </SidebarMenuItem>
         ))}
+        <SidebarGroupLabel className='mt-2'>Others</SidebarGroupLabel>
+
+        <SidebarMenuItem key={'docs'}>
+          <a href="https://whatsapp-backend.astaweda.com/api/v1" target="_blank">
+            <SidebarMenuButton tooltip="Docs">
+              <Dock />
+              <span>Docs</span>
+            </SidebarMenuButton>
+          </a>
+        </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
   );
