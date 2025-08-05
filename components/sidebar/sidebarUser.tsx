@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronsUpDown, CreditCard, LogOut, Settings, Sparkles } from 'lucide-react';
+import { ChevronsUpDown, LogOut } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
@@ -14,12 +14,6 @@ import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/c
 import React from 'react';
 import { useAuthStore } from '@/store/authStore';
 import { useRouter } from 'next/navigation';
-
-// const NAV_USER_MENU = [
-//   { title: 'Upgrade to Pro', icon: Sparkles, url: '#', separator: true },
-//   { title: 'Billing', icon: CreditCard, url: '#' },
-//   { title: 'Settings', icon: Settings, url: '#', separator: true }
-// ];
 
 export function NavUser({ user }: { user: { name: string; email: string; avatar: string } }) {
   const { isMobile } = useSidebar();
